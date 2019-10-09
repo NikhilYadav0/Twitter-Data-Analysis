@@ -1,8 +1,15 @@
 const route = require("express").Router();
-var $ = require("jquery");
+// var $ = require("jquery").ajax;
+var jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const { window } = new JSDOM();
+const { document } = new JSDOM("").window;
+global.document = document;
+
+var $ = (jQuery = require("jquery")(window));
 
 const headers = {
-  Authorization: `OAuth oauth_consumer_key="r5tYYhpcjTn7BHkpv2Lz5F69m",oauth_token="886093060517449728-Fe0hjxypBgpgrzQOyuq0WcVbyGYRFuw",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1570282567",oauth_nonce="oVT5Wz",oauth_version="1.0",oauth_signature="h46Z5e4GLgvTHklEC8GAEQ9gykg%3D"`
+  Authorization: `OAuth oauth_consumer_key="r5tYYhpcjTn7BHkpv2Lz5F69m",oauth_token="886093060517449728-Fe0hjxypBgpgrzQOyuq0WcVbyGYRFuw",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1570606948",oauth_nonce="X72DuLSAtwt",oauth_version="1.0",oauth_signature="YrxVfgkiwYH4pXlrXurkFd3NWcU%3D"`
 };
 const corsUrl = "https://cors-anywhere.herokuapp.com/";
 var settings = {
@@ -10,11 +17,13 @@ var settings = {
   method: "GET",
   headers: headers
 };
-route.get("/", req => {
-  $.ajax(settings).done(tweets => {
-    return tweets;
-  });
-  return null;
+route.get("/", (req, res) => {
+  $.ajax(settings)
+    .done(tweets => {
+      console.log("here");
+      res.send(tweets);
+    })
+    .fail(e => console.log(e));
 });
 
 module.exports = route;

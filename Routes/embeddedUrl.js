@@ -1,17 +1,24 @@
-// const server=require('express')()
-// const corsUrl = "https://cors-anywhere.herokuapp.com/";
+const route = require("express").Router();
+var jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const { window } = new JSDOM();
+const { document } = new JSDOM("").window;
+global.document = document;
+var $ = (jQuery = require("jquery")(window));
 
-// var settings = {
-//     url: corsUrl + "https://api.twitter.com/1.1/statuses/home_timeline.json",
-//     method: "GET",
-//     headers: headers
-//   };
+const corsUrl = "https://cors-anywhere.herokuapp.com/";
+const oembedBaseUrl = "https://publish.twitter.com//oembed?url=";
+route.get("/:screen_name/:id", (req, res) => {
+  console.log(req.params);
+  var _url = `https://twitter.com/${req.params.screen_name}/status/${req.params.id}`;
+  var url = corsUrl + oembedBaseUrl + _url;
+  console.log(url);
+  $.ajax(url)
+    .done(tweet => {
+      console.log("this");
+      res.send(tweet.html);
+    })
+    .fail(e => console.log(e));
+});
 
-// server.use('/:screen_name/:id',(req)=>{
-//     // var _url = `https://twitter.com/${screen_name}/status/${id}`;
-//     // var tweetEmbeddedUrl =  `${corsUrl}${oembedBaseUrl}?url=${_url}`;
-//     console.log(req);
-//     $.ajax(settings).done((tweets)=>{
-//         return tweets;
-//     })
-// })
+module.exports = route;
