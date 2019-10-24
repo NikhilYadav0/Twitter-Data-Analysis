@@ -17,4 +17,4 @@ var obj = {
   version,
   nounce
 };
-export default obj;
+module.exports = obj;

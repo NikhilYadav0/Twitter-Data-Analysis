@@ -8,12 +8,16 @@ global.document = document;
 
 var $ = (jQuery = require("jquery")(window));
 
-const headers = {
-  Authorization: `OAuth oauth_consumer_key="r5tYYhpcjTn7BHkpv2Lz5F69m",oauth_token="886093060517449728-Fe0hjxypBgpgrzQOyuq0WcVbyGYRFuw",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1570606948",oauth_nonce="X72DuLSAtwt",oauth_version="1.0",oauth_signature="YrxVfgkiwYH4pXlrXurkFd3NWcU%3D"`
-};
+const getAuthorization = require("../src/Authorization");
+
 const corsUrl = "https://cors-anywhere.herokuapp.com/";
+const baseUrl = "https://api.twitter.com/1.1/statuses/home_timeline.json";
+const headers = {
+  Authorization: getAuthorization("GET", baseUrl, {})
+};
+console.log(headers.Authorization)
 var settings = {
-  url: corsUrl + "https://api.twitter.com/1.1/statuses/home_timeline.json",
+  url: corsUrl + baseUrl,
   method: "GET",
   headers: headers
 };

@@ -6,10 +6,44 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Twitter Analysis</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script>
+      $(() => {
+        $("#sidebar").click(function() {
+          $(".ui.sidebar").sidebar("toggle");
+        });
+      });
+    </script>
     <script src="GetHomeTimeline.js"></script>
-    <!-- <script src="../src/GetHomeTimeline.js"></script> -->
   </head>
   <body>
-    <div class="tweets container"></div>
+    <!-- --------------------------------------------------------------------- -->
+
+    <div class="ui top attached demo menu">
+      <a class="item" id="sidebar">
+        <i class="sidebar icon"></i>
+        Menu
+      </a>
+    </div>
+    <div class="ui sidebar inverted vertical menu">
+      <a class="item">
+        Twitter Analysis
+      </a>
+      <a class="item">
+        Quora Analysis
+      </a>
+      <a class="item">
+        About
+      </a>
+    </div>
+    <div class="pusher">
+      <div class="tweets container"></div>
+    </div>
+
+    <!-- -------------------------------------------------------- -->
   </body>
 </html>
