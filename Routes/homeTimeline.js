@@ -24,7 +24,6 @@ var settings = {
 route.get("/", (req, res) => {
   $.ajax(settings)
     .done(tweets => {
-      console.log("here");
       res.send(tweets);
     })
     .fail(e => console.log(e));
