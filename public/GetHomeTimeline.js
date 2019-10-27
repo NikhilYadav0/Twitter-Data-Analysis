@@ -1,3 +1,6 @@
+function getSpan(height) {
+  return Math.ceil(height / 10);
+}
 $.get("/getHomeTimeline", tweets => {
   console.log(tweets);
   if (tweets !== null) {
@@ -12,17 +15,24 @@ $.get("/getHomeTimeline", tweets => {
         var news = tags[tags.length - 1].href.split("/");
         var id = news[news.length - 1];
         console.log(id);
-        $(".tweets").append(`
-            <div style="width: 520px;display: inline-block;border-width:2px;">
-              ${tweetHtml}
-              <div style="display: flex;justify-content: center;"><a href="getNewsClassified/${id}">See News Classification</a></div>
-            </div>
+        $(".tweet-list").append(`
+            <div class="tweet" id="${id}">
+                  <div id="${id}nikhil">
+                    ${tweetHtml}
+                  </div>
+                  <div style="display: flex;justify-content: center;">
+                    <a href="getNewsClassified/${id}">
+                      See News Classification
+                    </a>
+                  </div>
+              </div>
           `);
+        // $(`#${id}`).ready(() => {
+        //   console.log($(`#${id}nikhil`).css("height"));
+        //   var h = Math.ceil(($(`#${id}nikhil`).css("height") + 20) / 10);
+        //   $(`#${id}`).css("grid-row-end", `span ${h}`);
+        // });
       });
-
-      // $.get("getRetweets",(data)=>{
-      //     console.log(data);
-      // })
     });
   }
 });

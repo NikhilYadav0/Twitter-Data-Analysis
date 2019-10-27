@@ -19,19 +19,22 @@ let options = {
   pythonPath: "python",
   pythonOptions: ["-u"] // get print results in real-time
 };
-
-function getClass(article) {
+var ans = "";
+function getClass(article, res, s) {
   var pyshell = new PythonShell(myPythonScriptPath, options);
   pyshell.send(JSON.stringify([article]));
   pyshell.on("message", function(message) {
     console.log(message);
-    return message;
+    ans = message;
   });
   pyshell.end(function(err) {
     if (err) {
       throw err;
     }
     console.log("finished");
+    console.log("My Class is: " + ans);
+    res.send(ans + "\n" + s);
+    return ans;
   });
 }
 // -----------------------------------------------------------------------------
@@ -40,7 +43,6 @@ route.get("/:id", (req, res) => {
   var uri = `https://t.co/${req.params.id}`;
   tall(uri)
     .then(url => {
-      console.log(url);
       request(url, function(err, response, body) {
         var doc = new DOMParser().parseFromString(body, "text/html");
         var arr = doc.querySelectorAll(".story-body__inner p");
@@ -50,9 +52,7 @@ route.get("/:id", (req, res) => {
           s = s + `<p>${arr[i].innerHTML}</p>`;
           str += arr[i].innerHTML;
         }
-        console.log("*  " + s);
-        getClass(str);
-        res.send(s);
+        getClass(str, res, s);
       });
     })
     .catch(err => console.error("AAAW ", err));

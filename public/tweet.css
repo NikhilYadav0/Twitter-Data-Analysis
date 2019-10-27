@@ -1,0 +1,13 @@
+.tweet {
+  width: 520px;
+  display: inline-block;
+  /* margin: 10px; */
+  grid-row-end: span 60;
+  overflow: auto;
+}
+.tweet-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+  grid-gap: 0 10px;
+  grid-auto-rows: 10px;
+}
