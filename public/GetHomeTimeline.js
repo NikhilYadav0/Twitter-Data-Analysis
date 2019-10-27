@@ -1,6 +1,3 @@
-function getSpan(height) {
-  return Math.ceil(height / 10);
-}
 $.get("/getHomeTimeline", tweets => {
   console.log(tweets);
   if (tweets !== null) {

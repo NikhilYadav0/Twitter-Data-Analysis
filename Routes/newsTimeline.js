@@ -58,4 +58,9 @@ route.get("/:id", (req, res) => {
     .catch(err => console.error("AAAW ", err));
 });
 
+route.post("/", (req, res) => {
+  var str = req.body.article;
+  getClass(str, res, str);
+});
+
 module.exports = route;

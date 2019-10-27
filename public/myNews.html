@@ -12,8 +12,13 @@
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
     <script src="sidebar.js"></script>
-    <link rel="stylesheet" href="tweet.css" />
-    <script src="GetHomeTimeline.js"></script>
+    <script>
+      $(() => {
+        $("#submit").on("click", () => {
+          $("#form").submit();
+        });
+      });
+    </script>
   </head>
   <body>
     <!-- --------------------------------------------------------------------- -->
@@ -25,7 +30,7 @@
       </a>
     </div>
     <div class="ui sidebar inverted vertical menu">
-      <a href="" class="item">
+      <a href="index.html" class="item">
         Twitter Analysis
       </a>
       <a href="myNews.html" class="item">
@@ -38,7 +43,30 @@
     <div class="pusher">
       <div class="container tweet-list"></div>
     </div>
-
+    <div style="position: absolute;left: 30%;top:20%">
+      <form
+        class="ui reply form"
+        id="form"
+        method="POST"
+        action="getNewsClassified"
+      >
+        <div class="field">
+          <textarea
+            style="width:600px;height: 400px;"
+            name="article"
+          ></textarea>
+        </div>
+        <div
+          id="submit"
+          class="ui primary submit labeled icon button"
+          style="position: absolute;left: 40%;"
+        >
+          <i class="icon edit"></i> Classify
+        </div>
+      </form>
+    </div>
     <!-- -------------------------------------------------------- -->
   </body>
 </html>
+
+<!-- getNewsClassified -->

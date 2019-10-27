@@ -7,7 +7,9 @@ const newsClassifiedTimeline = require("./Routes/newsTimeline");
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 server.use(express.static("public"));
-
+// server.get("/myNews",(req,res)=>{
+//   res.send()
+// })
 server.use("/getHomeTimeline", homeTimeline);
 server.use("/getEmbeddedUrl", embeddedUrl);
 server.use("/test", testPython);
